@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>God save the Pig</title>
+	</head>
+
+	<script id="vertex-shader" type="x-shader/x-vertex">
+	#version 300 es
+
+	in vec4 aPosition;
+	uniform mat4 modelViewMatrix;
+	uniform mat4 projectionMatrix;
+
+	in vec2 vTexCoord;
+	out vec2 fTexCoord;
+	void main(){
+		fTexCoord = vTexCoord;
+		gl_Position = projectionMatrix * modelViewMatrix * aPosition;
+	}
+	</script>
+
+	<script id="fragment-shader" type="x-shader/x-fragment">
+	#version 300 es
+
+	in vec2 fTexCoord;
+	out vec4 fColor;
+
+	void main() {
+		fColor = vec4(vec3(fTexCoord, 0.0), 1.0);
+	}
+	</script>
+
+	<script type="text/javascript" src="js/three.js"></script>
+	<script type="text/javascript" src="js/game.js"></script>
+
+	<body>
+		<div id="initial" align="center">
+			<div class="initialDisplay">
+				GOD SAVE THE PIG!<br><br>
+				Hi, my name is Nino and I need your help to live!<br><br>
+				Press up and down arrows on the keyboard to move me!<br><br>
+				Catch the lighting balls to improve our score<br><br>
+				and, please, avoid burning balls for preserving my life!
+			</div>
+			<div id="table1" style="width:100%; height:100%">
+			<button class="buttons" id="startButton">START GAME</button>
+			</div>
+		</div>
+		<div id="scenario">
+			<div>
+				<table id="table1" align="right">
+					<tr>
+					<th>SCORE</th>
+					<th>LEVEL</th>
+					<th>LIFE</th>
+					</tr>
+					<tr>
+					<td id="score">0</td>
+					<td id="level">0</td>
+					<td id="life">3</td>
+					</tr>
+				</table></div><button type="button" class="buttons" id="reset">EXIT</button>
+			<div class="gameOverPause" id="gameOver">GAME OVER!</div>
+			<div class="totalScore" id="totalPoints">Total Score: </div>
+			<div class="actualLevel" id="currentLevel">Level: </div>
+			<div class="lifePenalty" id="lifePenalty">Life Penalty!</div>
+			<div class="pointWin" id="increasePoints">Score increase!</div>
+			<div class="gameOverPause" id="stopGame">Press Space to Resume<br><br></div>
+		</div>
+	</body>
+</html>
