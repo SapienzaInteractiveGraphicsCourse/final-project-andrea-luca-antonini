@@ -1,5 +1,16 @@
 var distanceValue = "000", distanceField, texture;
 
+function configureBurningTexture() {
+  var side = 32;
+  var amount = Math.pow(side, 2); // you need 4 values for every pixel in side*side plane
+  var data = new Uint8Array(amount);
+  for (var i = 0; i < amount; i++) {
+    data[i] = Math.random()*120;
+  }
+  texture = new THREE.DataTexture(data, side, side, THREE.LuminanceFormat, THREE.UnsignedByteType);
+  texture.magFilter = THREE.NearestFilter;
+  texture.needsUpdate = true;
+}
 
 /*
 This function is called when START GAME button is pressed , all the objects of the scene
@@ -21,7 +32,7 @@ function init(){
     updateLife();
   };
   initialize();
-  configureTextureRocks();
+  configureBurningTexture();
   createScene();
   createLightsAndShadows();
   createDesert();
