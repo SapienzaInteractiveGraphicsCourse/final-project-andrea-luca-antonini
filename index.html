@@ -1,71 +1,99 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>God save the Pig</title>
+		<title>Ply (a pig that fly)</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta name="description" content="Interactive Graphics final project a.a. 2019/2020" />
+		<meta name="author" content="Andrea Luca Antonini" />
+		<link rel="stylesheet" type="text/css" href="css/ply.css" />
 	</head>
-
 	<script id="vertex-shader" type="x-shader/x-vertex">
 	#version 300 es
 
 	in vec4 aPosition;
+
 	uniform mat4 modelViewMatrix;
 	uniform mat4 projectionMatrix;
 
-	in vec2 vTexCoord;
-	out vec2 fTexCoord;
-	void main(){
-		fTexCoord = vTexCoord;
-		gl_Position = projectionMatrix * modelViewMatrix * aPosition;
+	in vec2 vCoord;
+	out vec2 fCoord;
+
+	void main() {
+		fCoord = vCoord;
+		gl_Position = projectionMatrix * modelViewMatrix * vec4(aPosition, 1.0);
 	}
 	</script>
-
-	<script id="fragment-shader" type="x-shader/x-fragment">
+	<script id="fragment-shader" type="x-shader/x-vertex">
 	#version 300 es
 
-	in vec2 fTexCoord;
+	in vec2 fCoord;
 	out vec4 fColor;
 
 	void main() {
-		fColor = vec4(vec3(fTexCoord, 0.0), 1.0);
+		fColor = vec4(vec3(fCoord,0.0),1.0);
 	}
 	</script>
-
 	<script type="text/javascript" src="js/three.js"></script>
-	<script type="text/javascript" src="js/game.js"></script>
-
+	<script type="text/javascript" src="js/ply.js"></script>
+	<script type="text/javascript" src="Common/InitShaders.js"></script>
+	<script type="text/javascript" src="Common/MVnew.js"></script>
+	<script type="module" scr="Audio/audio.js"></script>
 	<body>
-		<div id="initial" align="center">
-			<div class="initialDisplay">
-				GOD SAVE THE PIG!<br><br>
-				Hi, my name is Nino and I need your help to live!<br><br>
-				Press up and down arrows on the keyboard to move me!<br><br>
-				Catch the lighting balls to improve our score<br><br>
-				and, please, avoid burning balls for preserving my life!
+		<div id="presentation" align="center">
+			<div class="gameInstructions">
+				Ply ( a pig that fly )<br><br>
+				Help Ply to eat his needed food<br><br>
+				and avoid incoming dangerous !<br><br>
+				Guide Ply with UP and DOWN arrows !<br><br>
+				Press the space bar to pause the game!<br><br>
+				GOOD LUCK
 			</div>
-			<div id="table1" style="width:100%; height:100%">
-			<button class="buttons" id="startButton">START GAME</button>
+			<div  id="table1" style="width:100%; height:100%">
+			<button class="startButton" id="startButton">START GAME</button>
 			</div>
 		</div>
-		<div id="scenario">
-			<div>
-				<table id="table1" align="right">
-					<tr>
-					<th>SCORE</th>
-					<th>LEVEL</th>
-					<th>LIFE</th>
-					</tr>
-					<tr>
-					<td id="score">0</td>
-					<td id="level">0</td>
-					<td id="life">3</td>
-					</tr>
-				</table></div><button type="button" class="buttons" id="reset">EXIT</button>
-			<div class="gameOverPause" id="gameOver">GAME OVER!</div>
-			<div class="totalScore" id="totalPoints">Total Score: </div>
-			<div class="actualLevel" id="currentLevel">Level: </div>
-			<div class="lifePenalty" id="lifePenalty">Life Penalty!</div>
-			<div class="pointWin" id="increasePoints">Score increase!</div>
-			<div class="gameOverPause" id="stopGame">Press Space to Resume<br><br></div>
+		<div id="scenario" align="center">
+			<div><table id="table1" align="right">
+				<tr>
+				<th>SCORE</th>
+				<th>LEVEL</th>
+				<th>LIFE</th>
+				</tr>
+				<tr>
+				<td id="score">0</td>
+				<td id="level">0</td>
+				<td id="life">3</td>
+				</tr>
+			</table></div>
+			<div class="exitButton" align="left"><button type="button" class="myButton" id="pageReset">EXIT</button></div>
+			<div class="msgDysplay message--gameOverStopPause" id="gameOver">GAME OVER!</div>
+			<div class="msgDysplay message--totalScore" id="totalScore">Total Score: </div>
+			<div class="msgDysplay message--actualLevel" id="currentLevel">Level: </div>
+			<div class="msgDysplayNotUpper message--lifePenalty" id="alarmmsg">Ops! You loose a life!</div>
+			<div class="msgDysplayNotUpper message--pointWin" id="pointWin">Yeah! Points accumulated!</div>
+			<div class="msgDysplay message--gameOverStopPause" id="pauseGame">Press space bar to resume!<br><br></div>
+		</div>
+		<div class="audio">
+			<button id="settings"></button>
+			<div id='container' style="display:none">
+					<table id='settingsTable'>
+							<tbody>
+									<tr>
+											<td><button id='back'></button></td>
+									</tr>
+									<tr>
+											<td></td>
+											<td class="audio volume">Audio volume:</td>
+											<td><input type="range" id="volumeSlider"></td>
+									</tr>
+									<tr>
+											<td></td>
+											<td class="mute audio">Mute audio:</td>
+											<td><button id="muteButton"></button></td>
+									</tr>
+							</tbody>
+					</table>
+			</div>
 		</div>
 	</body>
 </html>
