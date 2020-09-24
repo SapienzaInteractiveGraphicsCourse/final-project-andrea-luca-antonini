@@ -14,6 +14,20 @@
 	background: linear-gradient(#e66c2c, #bed5fd);
 }
 
+#audio{
+	position: fixed;
+	bottom: 0px;
+	left: 10px;
+	height: 80px;
+	width: 100%;
+	z-index: 9999999;
+}
+
+#startDiv {
+	position: fixed;
+	top: 600px;
+}
+
 table, th, td {
   border: 4px solid black;
   border-spacing: 1px;
@@ -108,12 +122,12 @@ table#table1 th {
 .startButton {
 	-moz-box-shadow: 0px 0px 0px 2px #9fb4f2;
 	-webkit-box-shadow: 0px 0px 0px 2px #9fb4f2;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #476e9e));
-	background:-moz-linear-gradient(top, #000000 5%, #476e9e 100%);
-	background:-webkit-linear-gradient(top, #000000 5%, #476e9e 100%);
-	background:-o-linear-gradient(top, #000000 5%, #476e9e 100%);
-	background:-ms-linear-gradient(top, #000000 5%, #476e9e 100%);
-	background:linear-gradient(to bottom, #000000 5%, #476e9e 100%);
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c2dc7), color-stop(1, #476e9e));
+	background:-moz-linear-gradient(top, #6c2dc7 5%, #f62817 100%);
+	background:-webkit-linear-gradient(top, #6c2dc7 5%, #f62817 100%);
+	background:-o-linear-gradient(top, #6c2dc7 5%, #f62817 100%);
+	background:-ms-linear-gradient(top, #6c2dc7 5%, #f62817 100%);
+	background:linear-gradient(to bottom, #6c2dc7 5%, #f62817 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7892c2', endColorstr='#3c3234',GradientType=0);
 	background-color:#000000;
 	-moz-border-radius:10px;
@@ -131,11 +145,11 @@ table#table1 th {
 }
 .startButton:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #476e9e), color-stop(1, #7892c2));
-	background:-moz-linear-gradient(top, #476e9e 5%, #7892c2 100%);
-	background:-webkit-linear-gradient(top, #476e9e 5%, #7892c2 100%);
-	background:-o-linear-gradient(top, #476e9e 5%, #7892c2 100%);
-	background:-ms-linear-gradient(top, #476e9e 5%, #7892c2 100%);
-	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+	background:-moz-linear-gradient(top, #476e9e 5%, #e55b3c 100%);
+	background:-webkit-linear-gradient(top, #476e9e 5%, #e55b3c 100%);
+	background:-o-linear-gradient(top, #476e9e 5%, #e55b3c 100%);
+	background:-ms-linear-gradient(top, #476e9e 5%, #e55b3c 100%);
+	background:linear-gradient(to bottom, #476e9e 5%, #e55b3c 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#476e9e', endColorstr='#7892c2',GradientType=0);
 	background-color:#476e9e;
 }
@@ -147,12 +161,12 @@ table#table1 th {
 .myButton {
 	-moz-box-shadow: 0px 0px 0px 2px #9fb4f2;
 	-webkit-box-shadow: 0px 0px 0px 2px #9fb4f2;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #476e9e));
-	background:-moz-linear-gradient(top, #000000 5%, #476e9e 100%);
-	background:-webkit-linear-gradient(top, #000000 5%, #476e9e 100%);
-	background:-o-linear-gradient(top, #000000 5%, #476e9e 100%);
-	background:-ms-linear-gradient(top, #000000 5%, #476e9e 100%);
-	background:linear-gradient(to bottom, #000000 5%, #476e9e 100%);
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c2dc7), color-stop(1, #476e9e));
+	background:-moz-linear-gradient(top, #6c2dc7 5%, #f62817 100%);
+	background:-webkit-linear-gradient(top, #6c2dc7 5%, #f62817 100%);
+	background:-o-linear-gradient(top, #6c2dc7 5%, #f62817 100%);
+	background:-ms-linear-gradient(top, #6c2dc7 5%, #f62817 100%);
+	background:linear-gradient(to bottom, #6c2dc7 5%, #f62817 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7892c2', endColorstr='#3c3234',GradientType=0);
 	background-color:#000000;
 	-moz-border-radius:10px;
@@ -170,15 +184,154 @@ table#table1 th {
 }
 .myButton:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #476e9e), color-stop(1, #7892c2));
-	background:-moz-linear-gradient(top, #476e9e 5%, #7892c2 100%);
-	background:-webkit-linear-gradient(top, #476e9e 5%, #7892c2 100%);
-	background:-o-linear-gradient(top, #476e9e 5%, #7892c2 100%);
-	background:-ms-linear-gradient(top, #476e9e 5%, #7892c2 100%);
-	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+	background:-moz-linear-gradient(top, #476e9e 5%, #e55b3c 100%);
+	background:-webkit-linear-gradient(top, #476e9e 5%, #e55b3c 100%);
+	background:-o-linear-gradient(top, #476e9e 5%, #e55b3c 100%);
+	background:-ms-linear-gradient(top, #476e9e 5%, #e55b3c 100%);
+	background:linear-gradient(to bottom, #476e9e 5%, #e55b3c 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#476e9e', endColorstr='#7892c2',GradientType=0);
 	background-color:#476e9e;
 }
 .myButton:active {
 	position:relative;
 	top:1px;
+}
+
+/*
+.volumeSlider {
+	position: absolute;
+	left: 250px;
+	bottom: 25px;
+	margin: 0 auto;
+	height: 15px;
+	width: 300px;
+	background: #555;
+	border-radius: 15px;
+}
+
+.ui-slider-range-min {
+		height: 5px;
+		width: 300px;
+		position: absolute;
+		background: $primary-color;
+		border: none;
+		border-radius: 10px;
+  	outline: none;
+}
+
+.ui-slider-handle {
+		width: 20px;
+  	height: 20px;
+		border-radius: 20px;
+  	background: #FFF;
+  	position: absolute;
+  	margin-left: -8px;
+  	margin-top: -8px;
+  	cursor: pointer;
+  	outline: none;
+}*/
+
+input[type=range] {
+	position: absolute;
+	left: 250px;
+	bottom: 25px;
+  -webkit-appearance: none;
+  max-width: 10rem;
+  width: 100%;
+  background: transparent;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  height: 0.9rem;
+  margin: 0;
+  width: 100%;
+  cursor: pointer;
+  background: #464646;
+  background: linear-gradient(
+    to bottom right,
+    transparent 50%,
+    #464646 50%
+  );
+}
+
+input[type=range]::-moz-range-track {
+  height: 0.9rem;
+  margin: 0;
+  width: 100%;
+  cursor: pointer;
+  background: #464646;
+  background: linear-gradient(
+    to bottom right,
+    transparent 50%,
+    #464646 50%
+  );
+}
+
+input[type=range]::-ms-track {
+  height: 0.9rem;
+  margin: 0;
+  width: 100%;
+  cursor: pointer;
+  color: transparent;
+  background: #464646;
+  border: 0;
+  background: linear-gradient(
+    to bottom right,
+    transparent 50%,
+    #464646 50%
+  );
+}
+
+input[type=range]::-ms-fill-lower {
+ background: transparent;
+}
+
+/*Audio botton*/
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1.5rem;
+  width: 0.5rem;
+  background: #ffffff;
+  border: 1px solid;
+  margin-top: -5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+input[type=range]:focus::-webkit-slider-thumb {
+  box-shadow: 0px 0px 7px 3px #0065c4;
+}
+
+input[type=range]::-moz-range-thumb {
+  -webkit-appearance: none;
+  height: 1.5rem;
+  width: 0.5rem;
+  background: #ffffff;
+  border: 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 0;
+}
+
+input[type=range]:focus::-moz-range-thumb {
+  box-shadow: 0px 0px 7px 3px #0065c4;
+}
+
+input[type=range]::-ms-thumb {
+  -webkit-appearance: none;
+  height: 0.75rem;
+  width: 0.5rem;
+  background: #ffffff;
+  border: 1px solid;
+  margin-top: 0;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+input[type=range]:focus::-ms-thumb {
+  box-shadow: 0px 0px 7px 3px #0065c4;
 }

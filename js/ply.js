@@ -16,47 +16,47 @@ function initialize(){
 
   gameVariables = {
           textureLoaded: true,
-          speedFactor:1,
-          speed:0,
-          baseSpeed:0.00037,
-          grassRotation:0.006,
-          skyRotation:0.006,
-          view:70,
-          rr:0,
+          speedFactor: 1,
+          speed: 0,
+          baseSpeed: 0.00037,
+          grassRotation: 0.006,
+          skyRotation: 0.006,
+          view: 70,
+          rr: 0,
 
-          deltaTime:0,
-          distance:0,
-          ratioSpeedDistance:50,
-          near:1,
-          far:10000,
-          farLight:1000,
+          deltaTime: 0,
+          distance: 0,
+          ratioSpeedDistance: 50,
+          near: 1,
+          far: 10000,
+          farLight: 1000,
 
-          pigInitialHeight:100,
+          pigInitialHeight: 100,
           pigEndPositionY: 0.5,
           pigEndRotationY: 0.01,
-          planeHeight:80,
-          pigSpeed:0,
-          wingRotation:0.1,
+          planeHeight: 80,
+          pigSpeed: 0,
+          wingRotation: 0.1,
 
-          grassRadius:660,
-          grassLength:1000,
+          grassRadius: 660,
+          grassLength: 1000,
 
-          foodKeepDistance:15,
-          scoreValue:5,
-          foodSpeed:.5,
-          foodLastAdd:0,
-          distanceAddFood:115,
+          foodKeepDistance: 15,
+          scoreValue: 5,
+          foodSpeed: 0.5,
+          foodLastAdd: 0,
+          distanceAddFood: 115,
 
-          dangerKeepDistance:15,
-          dangerLastAdd:0,
-          distanceAddDanger:170,
+          dangerKeepDistance: 15,
+          dangerLastAdd: 0,
+          distanceAddDanger: 170,
           score: 0,
           level: 0,
           life: 3,
-          play:true,
-          isGameOver:false,
-          UP:false,
-          DOWN:false
+          play: true,
+          isGameOver: false,
+          UP: false,
+          DOWN: false
          };
 }
 
@@ -436,10 +436,10 @@ var Rocket = function() {
 
 Sky = function(){
   this.mesh = new THREE.Object3D();
-  this.numELem = 12;
+  this.numElem = 12;
   this.rockets = [];
-  var stepToAdd = Math.PI*2 / this.numELem;
-  for(var i=0; i<this.numELem; i++){
+  var stepToAdd = Math.PI*2 / this.numElem;
+  for(var i=0; i<this.numElem; i++){
     var c = new Rocket();
     var s = 0.10+Math.random()*0.15;
     this.rockets.push(c);
@@ -681,6 +681,7 @@ function loop(){
       dangerOwner.addDanger();
     }
     updatePig();
+    zoom();
     updateDistance();
     gameVariables.speed = gameVariables.baseSpeed * gameVariables.pigSpeed;
     foodOwner.foodAnimation();
@@ -716,6 +717,17 @@ function init(){
   document.getElementById("pageReset").onclick = function(){
     window.location.reload();
   };
+  document.getElementById("muteAudio").onclick = function(){
+    muteAudio();
+  };
+  document.getElementById("volumeSlider").onchange = function(event){
+    volume = parseFloat(event.target.value);
+    for(let i = 0; i < tracks.length; i++){
+      sounds[i].setVolume(volume);
+    }
+  }
+  document.addEventListener('mousemove', mouseMove, false);
+  audioListener = new THREE.AudioListener();
   initialize();
   configureTextureFood();
   createScene();
@@ -725,7 +737,41 @@ function init(){
   createPig();
   createFood();
   createDanger();
+  ambientMusic();
   loop();
+}
+
+// Sound variables
+var sound, audioListener, audioLoader;
+var volume = 0.3;
+const tracks = ["../Audio/threeLittlePigsRemix.mp3", "../Audio/springSounds.mp3"];
+var sounds = [];
+
+function ambientMusic() {
+  audioLoader = new THREE.AudioLoader();
+  for (let i = 0; i < tracks.length; i++) {
+    sounds[i] = new THREE.Audio(audioListener);
+    audioLoader.load(tracks[i], function(buffer) {
+    	sounds[i].setBuffer(buffer);
+    	sounds[i].setLoop(true);
+    	sounds[i].setVolume(volume);
+      if (i == 0) {
+        sound = sounds[0];
+        sound.play();
+      }
+    });
+  }
+}
+
+function muteAudio(){
+  if(!sound.isPlaying){
+    document.getElementById("muteAudio").innerHTML = "MUTE AUDIO";
+    sound.play();
+  }
+  else{
+    document.getElementById("muteAudio").innerHTML = "AUDIO ON";
+    sound.pause();
+  }
 }
 
 function manageAnimation(event) {
@@ -734,9 +780,13 @@ function manageAnimation(event) {
       gameVariables.play = !gameVariables.play;
       if (!gameVariables.play){
         pauseGame.style.display="block";
+        sounds[0].pause();
+        sounds[1].play();
       }
       else {
         pauseGame.style.display="none";
+        sounds[1].pause();
+        sounds[0].play();
         loop();
       }
     }
@@ -747,6 +797,7 @@ function interpolate(min, max, fraction) {
     return (max - min) * fraction + min;
 }
 
+/*
 function move() {
   if(gameVariables.UP) {
     if(pig.mesh.position.y >= 258)
@@ -781,8 +832,8 @@ function move() {
       pig.backLegDX.rotation.z = interpolate(pig.backLegDX.rotation.z, 0, 1);
       pig.backLegSX.rotation.z = interpolate(pig.backLegSX.rotation.z, 0.6, 1);
     }
-  }*/
-}
+  }
+}*/
 
 document.onkeydown = function(e) {
   if(e.keyCode == 38) {
@@ -797,6 +848,37 @@ document.onkeyup = function(e) {
   if(e.keyCode == 38) gameVariables.UP = false;
   if(e.keyCode == 40) gameVariables.DOWN = false;
   if(pig != undefined ) pig.mesh.rotation.z = 0;
+}
+
+var mouse = {x:0, y:0};
+function mouseMove(event) {
+  var xAxis = -1 + (event.clientX / WIDTH) * 2;
+  var yAxis = 1 - (event.clientY / HEIGHT) * 2;
+  mouse = {x:xAxis, y:yAxis};
+}
+
+function move() {
+  //Fly margins
+  var pigX = fly(mouse.x, -1, 1, -100, 100);
+  var pigY = fly(mouse.y, -1, 1, 100, 258);
+  //Movements
+  pig.mesh.position.y += (pigY - pig.mesh.position.y) * 0.1;
+  pig.mesh.rotation.x = (pig.mesh.position.y - pigY) * 0.005;
+  pig.mesh.rotation.z = (pigY - pig.mesh.position.y) * 0.01;
+}
+
+function fly(mouse, minM, maxM, minR, maxR) {
+  var border = Math.max(Math.min(mouse, maxM), minM);
+  var middleM = maxM - minM;
+  var delay = (border - minM) / middleM;
+  var middleR = maxR - minR;
+  var result = minR + (delay * middleR);
+  return result;
+}
+
+function zoom() {
+  camera.fov = fly(mouse.x, -1, 1, 50, 90);
+  camera.updateProjectionMatrix();
 }
 
 function roundToOneValue(v,vmin,vmax,tmin,tmax){
