@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee+Shade');
+
 #scenario {
 	position: absolute;
 	width: 98%;
@@ -25,7 +27,7 @@
 
 #startDiv {
 	position: fixed;
-	top: 600px;
+	top: 700px;
 }
 
 table, th, td {
@@ -45,8 +47,9 @@ table#table1 th {
   background-color: black;
   color: white;
 }
-.msgDysplay {
+.display {
 	font-weight: bold;
+	font-family: 'Bungee Shade';
 	position: absolute;
 	left: 0;
 	width: 100%;
@@ -57,6 +60,7 @@ table#table1 th {
 
 .message--gameOverStopPause {
 	font-size: 2.25vw;
+	font-family: 'Bungee Shade';
 	bottom: 60vh;
 	display: none;
 	text-indent: 0.5em;
@@ -64,8 +68,9 @@ table#table1 th {
 	color: #fff;
 }
 
-.msgDysplayNotUpper {
+.displayLow {
 	font-weight: bold;
+	font-family: 'Bungee Shade';
 	position: absolute;
 	left: 0;
 	width: 100%;
@@ -75,6 +80,7 @@ table#table1 th {
 
 .message--lifePenalty {
 	font-size: 1.5vw;
+	font-family: 'Bungee Shade';
 	bottom: 20vh;
 	display: none;
 	text-indent: 0.5em;
@@ -84,6 +90,7 @@ table#table1 th {
 
 .message--pointWin {
 	font-size: 1.5vw;
+	font-family: 'Bungee Shade';
 	bottom: 15vh;
 	display: none;
 	text-indent: 0.5em;
@@ -93,6 +100,7 @@ table#table1 th {
 
 .message--totalScore {
 	font-size: 1.5vw;
+	font-family: 'Bungee Shade';
 	bottom: 50vh;
 	display: none;
 	text-indent: 0.5em;
@@ -102,6 +110,7 @@ table#table1 th {
 
 .message--actualLevel {
 	font-size: 1.5vw;
+	font-family: 'Bungee Shade';
 	bottom: 40vh;
 	display: none;
 	text-indent: 0.5em;
@@ -110,9 +119,9 @@ table#table1 th {
 }
 
 .gameInstructions{
-	font-size: 2.25vw;
+	font-size: 1.25vw;
 	font-weight: bold;
-	font-family: Arial;
+	font-family: 'Bungee Shade';
 	bottom: 40vh;
 	display: block;
 	text-indent: 0.3em;
@@ -197,40 +206,6 @@ table#table1 th {
 	top:1px;
 }
 
-/*
-.volumeSlider {
-	position: absolute;
-	left: 250px;
-	bottom: 25px;
-	margin: 0 auto;
-	height: 15px;
-	width: 300px;
-	background: #555;
-	border-radius: 15px;
-}
-
-.ui-slider-range-min {
-		height: 5px;
-		width: 300px;
-		position: absolute;
-		background: $primary-color;
-		border: none;
-		border-radius: 10px;
-  	outline: none;
-}
-
-.ui-slider-handle {
-		width: 20px;
-  	height: 20px;
-		border-radius: 20px;
-  	background: #FFF;
-  	position: absolute;
-  	margin-left: -8px;
-  	margin-top: -8px;
-  	cursor: pointer;
-  	outline: none;
-}*/
-
 input[type=range] {
 	position: absolute;
 	left: 250px;
@@ -303,7 +278,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 input[type=range]:focus::-webkit-slider-thumb {
-  box-shadow: 0px 0px 7px 3px #0065c4;
+  box-shadow: 0px 0px 7px 3px #f62817;
 }
 
 input[type=range]::-moz-range-thumb {
@@ -318,7 +293,7 @@ input[type=range]::-moz-range-thumb {
 }
 
 input[type=range]:focus::-moz-range-thumb {
-  box-shadow: 0px 0px 7px 3px #0065c4;
+  box-shadow: 0px 0px 7px 3px #f62817;
 }
 
 input[type=range]::-ms-thumb {
@@ -333,5 +308,5 @@ input[type=range]::-ms-thumb {
 }
 
 input[type=range]:focus::-ms-thumb {
-  box-shadow: 0px 0px 7px 3px #0065c4;
+  box-shadow: 0px 0px 7px 3px #f62817;
 }

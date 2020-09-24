@@ -41,12 +41,13 @@
 	<body>
 		<div id="presentation" align="center">
 			<div class="gameInstructions">
-				Ply ( a pig that fly )<br><br>
-				Help Ply to eat his needed food<br><br>
-				and avoid incoming dangerous !<br><br>
-				Guide Ply moving the cursor !<br><br>
-				Press the space bar to pause the game!<br><br>
-				GOOD LUCK!
+				<h1>Ply ( a pig that fly )</h1><br><br>
+				<h3>Help Ply to eat his needed food<br><br>
+				and avoid incoming dangers!<br><br>
+				Move the mouse UP/DOWN to guide Ply<br><br>
+				and LEFT/RIGHT to zoom the camera! <br><br>
+				Press the space bar to pause the game!</h3><br><br>
+				<h2>GOOD LUCK!</h2>
 			</div>
 			<div id="startDiv" style="width:100%; height:100%" align="center">
 			<button class="startButton" id="startButton">START GAME</button>
@@ -70,12 +71,12 @@
 			<div class="musicButton" align="left"><button type="button" class="myButton" id="muteAudio">MUTE AUDIO</button></div>
 			<div class="volumeSlider" align="center"><input type="range" min="0" max="1" step="0.1" value="0.3" id="volumeSlider"/></div>
 			</div>
-			<div class="msgDysplay message--gameOverStopPause" id="gameOver">GAME OVER!</div>
-			<div class="msgDysplay message--totalScore" id="totalScore">Total Score: </div>
-			<div class="msgDysplay message--actualLevel" id="currentLevel">Level: </div>
-			<div class="msgDysplayNotUpper message--lifePenalty" id="alarmmsg">Ops! You loose a life !</div>
-			<div class="msgDysplayNotUpper message--pointWin" id="pointWin">Yeah! Points accumulated!</div>
-			<div class="msgDysplay message--gameOverStopPause" id="pauseGame">Press space bar to resume!<br><br></div>
+			<div class="display message--gameOverStopPause" id="gameOver">GAME OVER!</div>
+			<div class="display message--totalScore" id="totalScore">Total Score: </div>
+			<div class="display message--actualLevel" id="currentLevel">Level: </div>
+			<div class="displayLow message--lifePenalty" id="alarmmsg">Ops! You loose a life !</div>
+			<div class="displayLow message--pointWin" id="pointWin">Yeah! Points accumulated!</div>
+			<div class="display message--gameOverStopPause" id="pauseGame">Press space bar to resume!<br><br></div>
 		</div>
 	</body>
 </html>

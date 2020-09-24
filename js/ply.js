@@ -680,6 +680,10 @@ function loop(){
       gameVariables.dangerLastAdd = Math.floor(gameVariables.distance);
       dangerOwner.addDanger();
     }
+    if(gameVariables.life == 0){
+      gameVariables.isGameOver = true;
+      showGameOver();
+    }
     updatePig();
     zoom();
     updateDistance();
