@@ -748,7 +748,7 @@ function init(){
 // Sound variables
 var sound, audioListener, audioLoader;
 var volume = 0.3;
-const tracks = ["/Audio/threeLittlePigsRemix.mp3", "/Audio/springSounds.mp3"];
+const tracks = ["../Audio/threeLittlePigsRemix.mp3", "../Audio/springSounds.mp3"];
 var sounds = [];
 
 function ambientMusic() {
