@@ -748,7 +748,7 @@ function init(){
 // Sound variables
 var sound, audioListener, audioLoader;
 var volume = 0.3;
-const tracks = ["https://github.com/SapienzaInteractiveGraphicsCourse/final-project-andrea-luca-antonini/blob/master/Audio/threeLittlePigsRemix.mp3", "https://github.com/SapienzaInteractiveGraphicsCourse/final-project-andrea-luca-antonini/blob/master/Audio/springSounds.mp3"];
+const tracks = ["https://raw.githubusercontent.com/SapienzaInteractiveGraphicsCourse/final-project-andrea-luca-antonini/blob/master/Audio/threeLittlePigsRemix.mp3", "https://raw.githubusercontent.com/SapienzaInteractiveGraphicsCourse/final-project-andrea-luca-antonini/blob/master/Audio/springSounds.mp3"];
 var sounds = [];
 
 function ambientMusic() {
