@@ -15,49 +15,49 @@ function initialize(){
   };
 
   gameVariables = {
-          textureLoaded: true,
-          speedFactor: 1,
-          speed: 0,
-          baseSpeed: 0.00037,
-          grassRotation: 0.006,
-          skyRotation: 0.006,
-          view: 70,
-          rr: 0,
+    textureLoaded: true,
+    speedFactor: 1,
+    speed: 0,
+    baseSpeed: 0.00037,
+    grassRotation: 0.006,
+    skyRotation: 0.006,
+    view: 70,
+    rr: 0,
 
-          deltaTime: 0,
-          distance: 0,
-          ratioSpeedDistance: 50,
-          near: 1,
-          far: 10000,
-          farLight: 1000,
+    deltaTime: 0,
+    distance: 0,
+    ratioSpeedDistance: 50,
+    near: 1,
+    far: 10000,
+    farLight: 1000,
 
-          pigInitialHeight: 100,
-          pigEndPositionY: 0.5,
-          pigEndRotationY: 0.01,
-          planeHeight: 80,
-          pigSpeed: 0,
-          wingRotation: 0.1,
+    pigInitialHeight: 100,
+    pigEndPositionY: 0.5,
+    pigEndRotationY: 0.01,
+    planeHeight: 80,
+    pigSpeed: 0,
+    wingRotation: 0.1,
 
-          grassRadius: 660,
-          grassLength: 1000,
+    grassRadius: 660,
+    grassLength: 1000,
 
-          foodKeepDistance: 15,
-          scoreValue: 5,
-          foodSpeed: 0.5,
-          foodLastAdd: 0,
-          distanceAddFood: 115,
+    foodKeepDistance: 15,
+    scoreValue: 5,
+    foodSpeed: 0.5,
+    foodLastAdd: 0,
+    distanceAddFood: 115,
 
-          dangerKeepDistance: 15,
-          dangerLastAdd: 0,
-          distanceAddDanger: 170,
-          score: 0,
-          level: 0,
-          life: 3,
-          play: true,
-          isGameOver: false,
-          UP: false,
-          DOWN: false
-         };
+    dangerKeepDistance: 15,
+    dangerLastAdd: 0,
+    distanceAddDanger: 170,
+    score: 0,
+    level: 0,
+    life: 3,
+    play: true,
+    isGameOver: false,
+    UP: false,
+    DOWN: false
+  };
 }
 
 var scene, camera, renderer, container, ambientLight, hemisphereLight, directionalLight;
@@ -307,7 +307,7 @@ Pig = function(color, transparent, setOpacity){
   this.mesh.add(this.frontLegSX);
 }
 
-var Rocket = function() {
+var Airplane = function() {
   this.mesh = new THREE.Object3D();
   //cockpit
   var cockpitGeo = new THREE.BoxGeometry(60, 50, 50, 1, 1, 1),
@@ -437,12 +437,12 @@ var Rocket = function() {
 Sky = function(){
   this.mesh = new THREE.Object3D();
   this.numElem = 12;
-  this.rockets = [];
+  this.airplanes = [];
   var stepToAdd = Math.PI*2 / this.numElem;
   for(var i=0; i<this.numElem; i++){
-    var c = new Rocket();
+    var c = new Airplane();
     var s = 0.10+Math.random()*0.15;
-    this.rockets.push(c);
+    this.airplanes.push(c);
     var a = stepToAdd*i;
     var h = 800 + Math.random()*300;
     c.mesh.position.z = -300-Math.random()*100;
@@ -650,11 +650,11 @@ function createPig(){
   scene.add(pig.mesh);
 }
 
-function createRocket() {
-  rocket = new Rocket();
-  rocket.mesh.scale.set(0.25, 0.25, 0.25);
-  rocket.mesh.position.y = 100;
-  scene.add(rocket.mesh);
+function createAirplane() {
+  airplane = new Airplane();
+  airplane.mesh.scale.set(0.25, 0.25, 0.25);
+  airplane.mesh.position.y = 100;
+  scene.add(airplane.mesh);
 }
 
 function createFood(){
@@ -838,21 +838,6 @@ function move() {
     }
   }
 }*/
-
-document.onkeydown = function(e) {
-  if(e.keyCode == 38) {
-    gameVariables.UP = true;
-  }
-  if(e.keyCode == 40) {
-    gameVariables.DOWN = true;
-  }
-}
-
-document.onkeyup = function(e) {
-  if(e.keyCode == 38) gameVariables.UP = false;
-  if(e.keyCode == 40) gameVariables.DOWN = false;
-  if(pig != undefined ) pig.mesh.rotation.z = 0;
-}
 
 var mouse = {x:0, y:0};
 function mouseMove(event) {
