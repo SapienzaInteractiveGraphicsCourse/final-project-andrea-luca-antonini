@@ -30,9 +30,13 @@
 	top: 700px;
 }
 
+
 table, th, td {
   border: 4px solid black;
   border-spacing: 1px;
+	height: 30px;
+	width: 100px;
+	border-radius: 10px;
 }
 th, td {
   text-align: center;
@@ -44,9 +48,10 @@ table#table1 tr:nth-child(odd) {
  background-color: #fff;
 }
 table#table1 th {
-  background-color: black;
+  background-color: #476e9e;
   color: white;
 }
+
 .display {
 	font-weight: bold;
 	font-family: 'Bungee Shade';

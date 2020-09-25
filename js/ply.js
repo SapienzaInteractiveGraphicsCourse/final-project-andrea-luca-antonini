@@ -55,8 +55,6 @@ function initialize(){
     life: 3,
     play: true,
     isGameOver: false,
-    UP: false,
-    DOWN: false
   };
 }
 
@@ -68,14 +66,9 @@ var oldTime = new Date().getTime();
 var HEIGHT, WIDTH;
 
 function configureTextureFood() {
-  //texture = new THREE.TextureLoader().load("Textures/acornTexture.png");
-  //texture = new THREE.TextureLoader().load("Textures/texture3.jpg");
-  texture = new THREE.TextureLoader().load("Textures/texture1.jpg");
-  //texture.offset.set(0.7, 0.2);
-  texture.wrapS = THREE.RepeatWrapping;
-  //texture.wrapS = THREE.MirroredRepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  //texture.wrapT = THREE.MirroredRepeatWrapping;
+  texture = new THREE.TextureLoader().load("Textures/food.jpg");
+  texture.wrapS = THREE.ClampToEdgeWrapping;
+  texture.wrapT = THREE.ClampToEdgeWrapping;
 }
 
 function createScene() {
@@ -177,8 +170,6 @@ Pig = function(color, transparent, setOpacity){
   geomSnout.vertices[5].z+=6;
   geomSnout.vertices[6].y-=9;
   geomSnout.vertices[6].z-=6;
-  //geomSnout.vertices[7].y-=9;
-  //geomSnout.vertices[7].z+=6;
   //Eye
   var geomEye = new THREE.SphereGeometry(5,30,30);
   geomEye.applyMatrix( new THREE.Matrix4().makeScale(1.2, 0.8, 0.6));
@@ -288,7 +279,7 @@ Pig = function(color, transparent, setOpacity){
     transparent:transparent
   });
   this.frontLegDX = new THREE.Mesh(geomFrontLegDX, matFrontLegDX);
-  this.frontLegDX.position.set(40,-30,0);
+  this.frontLegDX.position.set(35,-30,0);
   this.frontLegDX.castShadow = true;
   this.frontLegDX.receiveShadow = true;
   this.mesh.add(this.frontLegDX);
@@ -301,7 +292,7 @@ Pig = function(color, transparent, setOpacity){
     transparent:transparent
   });
   this.frontLegSX = new THREE.Mesh(geomFrontLegSX, matFrontLegSX);
-  this.frontLegSX.position.set(-40,-30,0);
+  this.frontLegSX.position.set(-35,-30,0);
   this.frontLegSX.castShadow = true;
   this.frontLegSX.receiveShadow = true;
   this.mesh.add(this.frontLegSX);
@@ -750,6 +741,7 @@ var sound, audioListener, audioLoader;
 var volume = 0.3;
 const tracks = ["Audio/threeLittlePigsRemix.mp3", "Audio/springSounds.mp3"];
 var sounds = [];
+var mute = false;
 
 function ambientMusic() {
   audioLoader = new THREE.AudioLoader();
@@ -768,12 +760,15 @@ function ambientMusic() {
 }
 
 function muteAudio(){
-  if(!sound.isPlaying){
+  if(mute){
     document.getElementById("muteAudio").innerHTML = "MUTE AUDIO";
-    sound.play();
+    mute = false;
+    if(gameVariables.play)
+      sounds[0].play();
   }
   else{
     document.getElementById("muteAudio").innerHTML = "AUDIO ON";
+    mute = true;
     sound.pause();
   }
 }
@@ -784,60 +779,28 @@ function manageAnimation(event) {
       gameVariables.play = !gameVariables.play;
       if (!gameVariables.play){
         pauseGame.style.display="block";
-        sounds[0].pause();
+        if(!mute)
+          sounds[0].pause();
+        else {
+          sounds[0].setVolume(0);
+        }
         sounds[1].play();
       }
       else {
         pauseGame.style.display="none";
         sounds[1].pause();
-        sounds[0].play();
+        if(!mute){
+          sounds[0].setVolume(volume);
+          sounds[0].play();
+        }
+        else{
+          sounds[0].setVolume(0);
+        }
         loop();
       }
     }
   }
 }
-
-function interpolate(min, max, fraction) {
-    return (max - min) * fraction + min;
-}
-
-/*
-function move() {
-  if(gameVariables.UP) {
-    if(pig.mesh.position.y >= 258)
-      gameVariables.UP = false;
-    else{
-      pig.mesh.position.y += 5;
-      pig.mesh.rotation.z = 0.2;
-      //pig.backLegDX.rotation.z = interpolate(pig.backLegSX.rotation.z, -0.6, 0.8);
-      //pig.backLegSX.rotation.z = interpolate(pig.backLegSX.rotation.z, -0.6, 0.8);
-    }
-  }
-  if(gameVariables.DOWN) {
-    if(pig.mesh.position.y <= 100)
-      gameVariables.DOWN = false;
-    else{
-      pig.mesh.position.y -= 5;
-      pig.mesh.rotation.z = -0.2;
-      //pig.backLegDX.rotation.z = interpolate(pig.backLegDX.rotation.z, 0.6, 1);
-      //pig.backLegSX.rotation.z = interpolate(pig.backLegSX.rotation.z, 0.6, 1);
-    }
-  }
-  if(gameVariables.life == 0){
-    gameVariables.isGameOver = true;
-    showGameOver();
-  }
-  /*else if(){
-    if(pig.backLegDX.rotation.z > 0){
-      pig.backLegDX.rotation.z = interpolate(pig.backLegDX.rotation.z, 0, 1);
-      pig.backLegSX.rotation.z = interpolate(pig.backLegSX.rotation.z, 0, 1);
-    }
-    else{
-      pig.backLegDX.rotation.z = interpolate(pig.backLegDX.rotation.z, 0, 1);
-      pig.backLegSX.rotation.z = interpolate(pig.backLegSX.rotation.z, 0.6, 1);
-    }
-  }
-}*/
 
 var mouse = {x:0, y:0};
 function mouseMove(event) {
@@ -854,6 +817,10 @@ function move() {
   pig.mesh.position.y += (pigY - pig.mesh.position.y) * 0.1;
   pig.mesh.rotation.x = (pig.mesh.position.y - pigY) * 0.005;
   pig.mesh.rotation.z = (pigY - pig.mesh.position.y) * 0.01;
+  pig.backLegDX.rotation.z = (pigY - pig.mesh.position.y) * -0.03;
+  pig.backLegSX.rotation.z = (pigY - pig.mesh.position.y) * -0.03;
+  pig.frontLegDX.rotation.z = (pigY - pig.mesh.position.y) * -0.03;
+  pig.frontLegSX.rotation.z = (pigY - pig.mesh.position.y) * -0.03;
 }
 
 function fly(mouse, minM, maxM, minR, maxR) {
@@ -866,7 +833,7 @@ function fly(mouse, minM, maxM, minR, maxR) {
 }
 
 function zoom() {
-  camera.fov = fly(mouse.x, -1, 1, 50, 90);
+  camera.fov = fly(mouse.x, -1, 1, 70, 90);
   camera.updateProjectionMatrix();
 }
 
